@@ -1,0 +1,423 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Updated to Onepercent cinematic color system */
+    /* Primary Background - Deep space with subtle gradient */
+    --background: 260 30% 4%;
+    --background-secondary: 250 20% 6%;
+
+    /* Foreground colors - Pure white for headings, soft gray for body */
+    --foreground: 0 0% 100%;
+    --foreground-body: 0 0% 92%;
+
+    /* Muted text - Soft gray with opacity for subtlety */
+    --muted: 240 2% 16%;
+    --muted-foreground: 0 0% 63%;
+    --muted-foreground-light: 0 0% 92% / 0.7;
+    --muted-foreground-dark: 0 0% 92% / 0.6;
+
+    /* Card backgrounds - Soft translucency for glassmorphism */
+    --card: 220 17% 98% / 0.03;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 260 30% 4%;
+    --popover-foreground: 0 0% 100%;
+
+    /* Updated primary to Rich Gold (#B8860B) for premium, luxurious accent with better white text contrast */
+    --primary: 43 71% 37%;
+    --primary-foreground: 260 30% 4%;
+    --primary-dark: 43 71% 30%;
+    --primary-light: 43 71% 45%;
+
+    /* Secondary - Cinematic Magenta (#C13FFF) */
+    --secondary: 280 100% 50%;
+    --secondary-foreground: 0 0% 100%;
+
+    /* Accent - Subtle UI elements */
+    --accent: 240 2% 25%;
+    --accent-foreground: 240 2% 96%;
+
+    /* Borders - Soft translucency for cinematic feel */
+    --border: 0 0% 100% / 0.15;
+    --border-light: 0 0% 100% / 0.08;
+    --border-dark: 0 0% 100% / 0.05;
+
+    /* Updated ring to Rich Gold for focus states with excellent contrast */
+    --ring: 43 71% 37%;
+
+    /* Updated cyan variants to Rich Gold spectrum for visual hierarchy */
+    --gradient-ai-cyan-primary: 43 71% 37%;
+    --gradient-ai-cyan-vibrant: 43 71% 42%;
+    --gradient-ai-cyan-soft: 43 71% 32%;
+
+    /* Updated radius for sharper precision - futuristic soft geometry */
+    --radius: 0.75rem;
+
+    /* Gradient tokens for AI energy effects */
+    --gradient-ai-cyan: 43 71% 37%;
+    --gradient-ai-magenta: 280 100% 50%;
+    --gradient-ai-blue: 51 100% 50%;
+    --gradient-ai-violet: 258 100% 50%;
+    --gradient-ai-purple-light: 280 100% 65%;
+
+    /* Typography tokens */
+    --font-heading-size-hero: clamp(1.75rem, 5vw, 3.5rem);
+    --font-heading-size-section: clamp(1.875rem, 4vw, 3rem);
+    --font-heading-size-subsection: clamp(1.25rem, 3vw, 1.5rem);
+    --font-body-size: clamp(0.875rem, 1.5vw, 1.125rem);
+    --font-label-size: 0.875rem;
+
+    --font-heading-weight: 700;
+    --font-subheading-weight: 600;
+    --font-body-weight: 400;
+    --font-label-weight: 500;
+
+    --font-heading-tracking: -0.02em;
+    --font-label-tracking: 0.05em;
+
+    /* Added motion and transition tokens for cinematic flow */
+    --transition-fast: 0.3s;
+    --transition-normal: 0.4s;
+    --transition-slow: 0.8s;
+    --ease-out-cubic: cubic-bezier(0.33, 1, 0.68, 1);
+    --ease-in-out-cubic: cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Added visual accent tokens for neural light language */
+    --icon-stroke-width: 1.5px;
+    --glow-intensity-low: 0.05;
+    --glow-intensity-medium: 0.08;
+    --glow-intensity-high: 0.15;
+  }
+
+  /* Added light mode theme support */
+  html.light {
+    --background: 0 0% 98%;
+    --background-secondary: 0 0% 95%;
+    --foreground: 0 0% 5%;
+    --foreground-body: 0 0% 20%;
+    --muted: 0 0% 85%;
+    --muted-foreground: 0 0% 40%;
+    --muted-foreground-light: 0 0% 20% / 0.7;
+    --muted-foreground-dark: 0 0% 20% / 0.6;
+    --card: 0 0% 100% / 0.8;
+    --card-foreground: 0 0% 5%;
+    --accent: 0 0% 90%;
+    --accent-foreground: 0 0% 10%;
+    --border: 0 0% 0% / 0.1;
+    --border-light: 0 0% 0% / 0.05;
+    --border-dark: 0 0% 0% / 0.02;
+    --ring: 51 100% 50%;
+    --glow-intensity-low: 0.02;
+    --glow-intensity-medium: 0.04;
+    --glow-intensity-high: 0.08;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+    background: radial-gradient(circle at 20% 20%, #0a0a12, #050507 80%);
+    transition: background-color var(--transition-normal) var(--ease-in-out-cubic);
+  }
+
+  html.light body {
+    background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+  }
+
+  h1 {
+    font-family: var(--font-satoshi), sans-serif;
+    @apply font-bold leading-tight;
+    font-size: var(--font-heading-size-hero);
+    font-weight: var(--font-heading-weight);
+    letter-spacing: var(--font-heading-tracking);
+    color: hsl(var(--foreground));
+  }
+
+  h2 {
+    font-family: var(--font-satoshi), sans-serif;
+    @apply font-bold leading-tight;
+    font-size: var(--font-heading-size-section);
+    font-weight: var(--font-heading-weight);
+    letter-spacing: var(--font-heading-tracking);
+    color: hsl(var(--foreground));
+  }
+
+  h3 {
+    font-family: var(--font-satoshi), sans-serif;
+    @apply font-semibold leading-snug;
+    font-size: var(--font-heading-size-subsection);
+    font-weight: var(--font-subheading-weight);
+    letter-spacing: var(--font-heading-tracking);
+    color: hsl(var(--foreground));
+  }
+
+  p {
+    @apply font-sans font-normal leading-relaxed;
+    font-size: var(--font-body-size);
+    font-weight: var(--font-body-weight);
+    color: hsl(var(--foreground-body));
+  }
+
+  label,
+  .label {
+    @apply font-sans font-medium;
+    font-size: var(--font-label-size);
+    font-weight: var(--font-label-weight);
+    letter-spacing: var(--font-label-tracking);
+  }
+}
+
+@layer components {
+  /* Updated glassmorphism cards with Rich Gold glow */
+  .bg-cinema-card {
+    @apply backdrop-blur-lg border rounded-xl;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 40px rgba(184, 134, 11, 0.08);
+  }
+
+  /* Enhanced surface with Rich Gold glow */
+  .bg-cinema-surface {
+    @apply backdrop-blur-md border rounded-xl;
+    background-color: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 30px rgba(184, 134, 11, 0.05);
+  }
+
+  /* AI Energy gradient - Magenta to Rich Gold neural spectrum */
+  .gradient-ai-energy {
+    background: radial-gradient(600px at 20% 20%, hsl(var(--gradient-ai-magenta)) 0%, transparent 70%),
+      radial-gradient(800px at 80% 50%, hsl(var(--gradient-ai-cyan)) 0%, transparent 70%);
+  }
+
+  /* Scene transition gradient for section dividers */
+  .gradient-scene-transition {
+    background: linear-gradient(90deg, transparent, rgba(184, 134, 11, 0.1), transparent);
+  }
+
+  /* Updated cyan glow to use Rich Gold (#B8860B) */
+  .glow-neon-cyan {
+    box-shadow: 0 0 20px rgba(184, 134, 11, 0.3), 0 0 40px rgba(184, 134, 11, 0.15);
+  }
+
+  /* Magenta glow effect for accent elements */
+  .glow-neon-magenta {
+    box-shadow: 0 0 20px rgba(193, 63, 255, 0.3), 0 0 40px rgba(193, 63, 255, 0.15);
+  }
+
+  /* Updated neural spectrum glow to use Rich Gold */
+  .glow-neural-spectrum {
+    box-shadow: 0 0 20px rgba(184, 134, 11, 0.3), 0 0 40px rgba(193, 63, 255, 0.15);
+  }
+
+  /* Added standardized shadow system for consistent depth */
+  .shadow-cinema-sm {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(184, 134, 11, 0.04);
+  }
+
+  .shadow-cinema-md {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(184, 134, 11, 0.06);
+  }
+
+  .shadow-cinema-lg {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12), 0 8px 16px rgba(184, 134, 11, 0.08);
+  }
+
+  .shadow-cinema-xl {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.14), 0 16px 32px rgba(184, 134, 11, 0.1);
+  }
+
+  .text-hero {
+    font-family: var(--font-satoshi), sans-serif;
+    @apply font-bold leading-tight;
+    font-size: var(--font-heading-size-hero);
+    letter-spacing: var(--font-heading-tracking);
+    color: hsl(var(--foreground));
+  }
+
+  .text-section-title {
+    font-family: var(--font-satoshi), sans-serif;
+    @apply font-bold leading-tight;
+    font-size: var(--font-heading-size-section);
+    letter-spacing: var(--font-heading-tracking);
+    color: hsl(var(--foreground));
+  }
+
+  .text-subsection {
+    font-family: var(--font-satoshi), sans-serif;
+    @apply font-semibold leading-snug;
+    font-size: var(--font-heading-size-subsection);
+    letter-spacing: var(--font-heading-tracking);
+    color: hsl(var(--foreground));
+  }
+
+  .text-body {
+    @apply font-sans font-normal leading-relaxed;
+    font-size: var(--font-body-size);
+    color: hsl(var(--foreground-body));
+  }
+
+  .text-label {
+    @apply font-sans font-medium uppercase;
+    font-size: var(--font-label-size);
+    letter-spacing: var(--font-label-tracking);
+  }
+
+  /* Enhanced interactive hover with Rich Gold */
+  .interactive-hover {
+    @apply transition-all;
+    transition-duration: var(--transition-normal);
+    transition-timing-function: var(--ease-out-cubic);
+  }
+
+  .interactive-hover:hover {
+    box-shadow: 0 0 20px rgba(184, 134, 11, 0.3);
+  }
+
+  /* Added cinematic link transitions */
+  a {
+    @apply transition-colors;
+    transition-duration: var(--transition-normal);
+    transition-timing-function: var(--ease-out-cubic);
+  }
+
+  a:hover {
+    color: hsl(var(--primary));
+  }
+
+  /* Added icon styling with neural light language */
+  .icon-neural {
+    stroke-width: var(--icon-stroke-width);
+    color: hsl(var(--foreground));
+    transition: all var(--transition-normal) var(--ease-out-cubic);
+  }
+
+  .icon-neural:hover {
+    color: hsl(var(--primary));
+    /* Updated to use Radiant Gold */
+    filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.4));
+  }
+
+  .icon-accent {
+    stroke-width: var(--icon-stroke-width);
+    color: hsl(var(--primary));
+    transition: all var(--transition-normal) var(--ease-out-cubic);
+  }
+
+  .icon-accent:hover {
+    /* Updated to use Rich Gold */
+    filter: drop-shadow(0 0 12px rgba(184, 134, 11, 0.6));
+  }
+
+  /* Added gradient direction and opacity utilities */
+  .gradient-135 {
+    background: linear-gradient(135deg, var(--tw-gradient-stops));
+  }
+
+  .gradient-ai-subtle {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--gradient-ai-cyan)) 0%,
+      hsl(var(--gradient-ai-violet)) 50%,
+      hsl(var(--gradient-ai-magenta)) 100%
+    );
+    opacity: 0.08;
+  }
+
+  /* Added blend mode utilities for light blending */
+  .blend-screen {
+    mix-blend-mode: screen;
+  }
+
+  .blend-overlay {
+    mix-blend-mode: overlay;
+  }
+
+  .blend-lighten {
+    mix-blend-mode: lighten;
+  }
+
+  /* Updated ambient glow utilities for cinematic depth with Rich Gold */
+  .ambient-glow-cyan {
+    box-shadow: 0 0 60px rgba(184, 134, 11, var(--glow-intensity-low)), 0 0 120px
+      rgba(184, 134, 11, var(--glow-intensity-low) * 0.5);
+  }
+
+  .ambient-glow-magenta {
+    box-shadow: 0 0 60px rgba(193, 63, 255, var(--glow-intensity-low)), 0 0 120px
+      rgba(193, 63, 255, var(--glow-intensity-low) * 0.5);
+  }
+
+  .ambient-glow-spectrum {
+    /* Updated to use Rich Gold */
+    box-shadow: 0 0 60px rgba(184, 134, 11, var(--glow-intensity-low)), 0 0 120px
+      rgba(193, 63, 255, var(--glow-intensity-low) * 0.5);
+  }
+
+  /* Updated radial glow cyan to use Rich Gold */
+  .radial-glow-cyan {
+    background: radial-gradient(400px at 60% 40%, rgba(184, 134, 11, var(--glow-intensity-medium)), transparent 70%);
+  }
+
+  .radial-glow-magenta {
+    background: radial-gradient(400px at 40% 60%, rgba(193, 63, 255, var(--glow-intensity-medium)), transparent 70%);
+  }
+
+  /* Added cinematic section spacing utilities */
+  .section-spacing-mobile {
+    @apply py-12 px-4;
+  }
+
+  .section-spacing-tablet {
+    @apply md:py-16 md:px-6;
+  }
+
+  .section-spacing-desktop {
+    @apply lg:py-24 lg:px-8;
+  }
+
+  /* Added element spacing for cards and grids */
+  .element-spacing-cards {
+    @apply gap-10 md:gap-12;
+  }
+
+  .element-spacing-stacked {
+    @apply space-y-6;
+  }
+
+  /* Added button shape language - rounded-lg for futuristic precision */
+  .btn-shape-cinema {
+    @apply rounded-lg;
+  }
+
+  /* Added card shape language - rounded-xl for premium geometry */
+  .card-shape-cinema {
+    @apply rounded-xl;
+  }
+
+  /* Updated gradient border utility to use Rich Gold */
+  .border-gradient-ai {
+    position: relative;
+    border: 1px solid transparent;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05)),
+      linear-gradient(90deg, rgba(184, 134, 11, 0.3), rgba(193, 63, 255, 0.3));
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+  }
+
+  /* Added hide-scrollbar utility for cinematic horizontal scroll */
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}

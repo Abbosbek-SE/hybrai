@@ -1,0 +1,6 @@
+{
+  "extends": ["next/core-web-vitals", "next/typescript", "prettier"],
+  "plugins": ["@typescript-eslint"],
+  "rules": {},
+  "ignorePatterns": ["node_modules/", ".next/", "dist/"]
+}

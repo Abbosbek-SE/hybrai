@@ -121,7 +121,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-background font-sans text-foreground;
     background: radial-gradient(circle at 20% 20%, #0a0a12, #050507 80%);
     transition: background-color var(--transition-normal) var(--ease-in-out-cubic);
   }
@@ -176,7 +176,7 @@
 @layer components {
   /* Updated glassmorphism cards with Rich Gold glow */
   .bg-cinema-card {
-    @apply backdrop-blur-lg border rounded-xl;
+    @apply rounded-xl border backdrop-blur-lg;
     background-color: rgba(255, 255, 255, 0.05);
     border-color: rgba(255, 255, 255, 0.12);
     box-shadow: 0 0 40px rgba(184, 134, 11, 0.08);
@@ -184,7 +184,7 @@
 
   /* Enhanced surface with Rich Gold glow */
   .bg-cinema-surface {
-    @apply backdrop-blur-md border rounded-xl;
+    @apply rounded-xl border backdrop-blur-md;
     background-color: rgba(255, 255, 255, 0.03);
     border-color: rgba(255, 255, 255, 0.1);
     box-shadow: 0 0 30px rgba(184, 134, 11, 0.05);
@@ -192,7 +192,8 @@
 
   /* AI Energy gradient - Magenta to Rich Gold neural spectrum */
   .gradient-ai-energy {
-    background: radial-gradient(600px at 20% 20%, hsl(var(--gradient-ai-magenta)) 0%, transparent 70%),
+    background:
+      radial-gradient(600px at 20% 20%, hsl(var(--gradient-ai-magenta)) 0%, transparent 70%),
       radial-gradient(800px at 80% 50%, hsl(var(--gradient-ai-cyan)) 0%, transparent 70%);
   }
 
@@ -203,34 +204,48 @@
 
   /* Updated cyan glow to use Rich Gold (#B8860B) */
   .glow-neon-cyan {
-    box-shadow: 0 0 20px rgba(184, 134, 11, 0.3), 0 0 40px rgba(184, 134, 11, 0.15);
+    box-shadow:
+      0 0 20px rgba(184, 134, 11, 0.3),
+      0 0 40px rgba(184, 134, 11, 0.15);
   }
 
   /* Magenta glow effect for accent elements */
   .glow-neon-magenta {
-    box-shadow: 0 0 20px rgba(193, 63, 255, 0.3), 0 0 40px rgba(193, 63, 255, 0.15);
+    box-shadow:
+      0 0 20px rgba(193, 63, 255, 0.3),
+      0 0 40px rgba(193, 63, 255, 0.15);
   }
 
   /* Updated neural spectrum glow to use Rich Gold */
   .glow-neural-spectrum {
-    box-shadow: 0 0 20px rgba(184, 134, 11, 0.3), 0 0 40px rgba(193, 63, 255, 0.15);
+    box-shadow:
+      0 0 20px rgba(184, 134, 11, 0.3),
+      0 0 40px rgba(193, 63, 255, 0.15);
   }
 
   /* Added standardized shadow system for consistent depth */
   .shadow-cinema-sm {
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(184, 134, 11, 0.04);
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.08),
+      0 1px 4px rgba(184, 134, 11, 0.04);
   }
 
   .shadow-cinema-md {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(184, 134, 11, 0.06);
+    box-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.1),
+      0 4px 8px rgba(184, 134, 11, 0.06);
   }
 
   .shadow-cinema-lg {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12), 0 8px 16px rgba(184, 134, 11, 0.08);
+    box-shadow:
+      0 4px 8px rgba(0, 0, 0, 0.12),
+      0 8px 16px rgba(184, 134, 11, 0.08);
   }
 
   .shadow-cinema-xl {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.14), 0 16px 32px rgba(184, 134, 11, 0.1);
+    box-shadow:
+      0 8px 16px rgba(0, 0, 0, 0.14),
+      0 16px 32px rgba(184, 134, 11, 0.1);
   }
 
   .text-hero {
@@ -345,41 +360,52 @@
 
   /* Updated ambient glow utilities for cinematic depth with Rich Gold */
   .ambient-glow-cyan {
-    box-shadow: 0 0 60px rgba(184, 134, 11, var(--glow-intensity-low)), 0 0 120px
-      rgba(184, 134, 11, var(--glow-intensity-low) * 0.5);
+    box-shadow:
+      0 0 60px rgba(184, 134, 11, var(--glow-intensity-low)),
+      0 0 120px rgba(184, 134, 11, var(--glow-intensity-low) * 0.5);
   }
 
   .ambient-glow-magenta {
-    box-shadow: 0 0 60px rgba(193, 63, 255, var(--glow-intensity-low)), 0 0 120px
-      rgba(193, 63, 255, var(--glow-intensity-low) * 0.5);
+    box-shadow:
+      0 0 60px rgba(193, 63, 255, var(--glow-intensity-low)),
+      0 0 120px rgba(193, 63, 255, var(--glow-intensity-low) * 0.5);
   }
 
   .ambient-glow-spectrum {
     /* Updated to use Rich Gold */
-    box-shadow: 0 0 60px rgba(184, 134, 11, var(--glow-intensity-low)), 0 0 120px
-      rgba(193, 63, 255, var(--glow-intensity-low) * 0.5);
+    box-shadow:
+      0 0 60px rgba(184, 134, 11, var(--glow-intensity-low)),
+      0 0 120px rgba(193, 63, 255, var(--glow-intensity-low) * 0.5);
   }
 
   /* Updated radial glow cyan to use Rich Gold */
   .radial-glow-cyan {
-    background: radial-gradient(400px at 60% 40%, rgba(184, 134, 11, var(--glow-intensity-medium)), transparent 70%);
+    background: radial-gradient(
+      400px at 60% 40%,
+      rgba(184, 134, 11, var(--glow-intensity-medium)),
+      transparent 70%
+    );
   }
 
   .radial-glow-magenta {
-    background: radial-gradient(400px at 40% 60%, rgba(193, 63, 255, var(--glow-intensity-medium)), transparent 70%);
+    background: radial-gradient(
+      400px at 40% 60%,
+      rgba(193, 63, 255, var(--glow-intensity-medium)),
+      transparent 70%
+    );
   }
 
   /* Added cinematic section spacing utilities */
   .section-spacing-mobile {
-    @apply py-12 px-4;
+    @apply px-4 py-12;
   }
 
   .section-spacing-tablet {
-    @apply md:py-16 md:px-6;
+    @apply md:px-6 md:py-16;
   }
 
   .section-spacing-desktop {
-    @apply lg:py-24 lg:px-8;
+    @apply lg:px-8 lg:py-24;
   }
 
   /* Added element spacing for cards and grids */
@@ -405,7 +431,8 @@
   .border-gradient-ai {
     position: relative;
     border: 1px solid transparent;
-    background-image: linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05)),
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05)),
       linear-gradient(90deg, rgba(184, 134, 11, 0.3), rgba(193, 63, 255, 0.3));
     background-origin: border-box;
     background-clip: padding-box, border-box;

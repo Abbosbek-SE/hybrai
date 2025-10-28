@@ -1,17 +1,17 @@
-"use client"
+'use client'
 
-import { motion } from "framer-motion"
-import { useState, useEffect } from "react"
+import { motion } from 'framer-motion'
+import { useState, useEffect } from 'react'
 
 const aiVisionaries = [
-  "Sora by OpenAI",
-  "Grok Imagine",
-  "LTX Studio",
-  "Veo by Google",
-  "Runway",
-  "flick.art",
-  "focalml.com",
-  "Midjourney",
+  'Sora by OpenAI',
+  'Grok Imagine',
+  'LTX Studio',
+  'Veo by Google',
+  'Runway',
+  'flick.art',
+  'focalml.com',
+  'Midjourney',
 ]
 
 export function SocialProofSection() {
@@ -21,18 +21,19 @@ export function SocialProofSection() {
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 1024)
     checkMobile()
-    window.addEventListener("resize", checkMobile)
-    return () => window.removeEventListener("resize", checkMobile)
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
   return (
-    <section className="relative self-stretch py-20 md:py-24 flex flex-col justify-center items-center gap-10 overflow-hidden">
+    <section className="relative flex flex-col items-center justify-center gap-10 self-stretch overflow-hidden py-20 md:py-24">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0A0812]/30 to-transparent" />
 
       <div
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-1/2 opacity-40"
+        className="absolute bottom-0 left-1/2 h-1/2 w-full -translate-x-1/2 opacity-40"
         style={{
-          background: "radial-gradient(ellipse at center bottom, rgba(193, 63, 255, 0.15) 0%, rgba(0, 0, 0, 0) 70%)",
+          background:
+            'radial-gradient(ellipse at center bottom, rgba(193, 63, 255, 0.15) 0%, rgba(0, 0, 0, 0) 70%)',
         }}
       />
 
@@ -40,21 +41,22 @@ export function SocialProofSection() {
         <motion.div
           className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.03] to-transparent"
           animate={{
-            x: ["-100%", "200%"],
+            x: ['-100%', '200%'],
           }}
           transition={{
             duration: 8,
             repeat: Number.POSITIVE_INFINITY,
             repeatDelay: 10,
-            ease: "linear",
+            ease: 'linear',
           }}
         />
       )}
 
       <motion.div
-        className="absolute top-0 left-0 right-0 h-[1px]"
+        className="absolute left-0 right-0 top-0 h-[1px]"
         style={{
-          background: "linear-gradient(90deg, transparent 0%, #B8860B 20%, #C13FFF 50%, #B8860B 80%, transparent 100%)",
+          background:
+            'linear-gradient(90deg, transparent 0%, #B8860B 20%, #C13FFF 50%, #B8860B 80%, transparent 100%)',
         }}
         animate={{
           opacity: [0.3, 0.6, 0.3],
@@ -62,7 +64,7 @@ export function SocialProofSection() {
         transition={{
           duration: 3,
           repeat: Number.POSITIVE_INFINITY,
-          ease: "easeInOut",
+          ease: 'easeInOut',
         }}
       />
 
@@ -70,13 +72,13 @@ export function SocialProofSection() {
       <div
         className="absolute inset-0"
         style={{
-          boxShadow: "inset 0 2px 20px rgba(0, 0, 0, 0.3), inset 0 -2px 20px rgba(0, 0, 0, 0.3)",
+          boxShadow: 'inset 0 2px 20px rgba(0, 0, 0, 0.3), inset 0 -2px 20px rgba(0, 0, 0, 0.3)',
         }}
       />
 
       <div className="relative z-10 flex flex-col items-center gap-5 px-4">
         <motion.h2
-          className="text-center text-foreground/90 text-2xl md:text-3xl font-semibold tracking-[0.08em]"
+          className="text-center text-2xl font-semibold tracking-[0.08em] text-foreground/90 md:text-3xl"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -86,7 +88,7 @@ export function SocialProofSection() {
         </motion.h2>
 
         <motion.p
-          className="text-center text-[#A1A1AA] text-sm md:text-base max-w-2xl leading-relaxed tracking-wide"
+          className="max-w-2xl text-center text-sm leading-relaxed tracking-wide text-[#A1A1AA] md:text-base"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -97,7 +99,7 @@ export function SocialProofSection() {
       </div>
 
       <motion.div
-        className="relative z-10 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-10 lg:gap-12 px-4 max-w-5xl"
+        className="relative z-10 grid max-w-5xl grid-cols-2 gap-8 px-4 md:grid-cols-4 md:gap-10 lg:gap-12"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
@@ -116,7 +118,7 @@ export function SocialProofSection() {
           >
             {hoveredIndex === index && !isMobile && (
               <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-[#B8860B]/30 via-[#C13FFF]/30 to-[#B8860B]/30 blur-2xl rounded-lg"
+                className="absolute inset-0 rounded-lg bg-gradient-to-r from-[#B8860B]/30 via-[#C13FFF]/30 to-[#B8860B]/30 blur-2xl"
                 layoutId="hoverGlow"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1.2 }}
@@ -126,15 +128,18 @@ export function SocialProofSection() {
             )}
 
             <motion.span
-              className="relative text-center text-muted-foreground/70 text-sm md:text-base font-medium tracking-[0.18em] uppercase transition-all duration-300"
+              className="relative text-center text-sm font-medium uppercase tracking-[0.18em] text-muted-foreground/70 transition-all duration-300 md:text-base"
               animate={{
-                color: hoveredIndex === index ? "hsl(var(--foreground))" : "hsl(var(--muted-foreground) / 0.7)",
+                color:
+                  hoveredIndex === index
+                    ? 'hsl(var(--foreground))'
+                    : 'hsl(var(--muted-foreground) / 0.7)',
                 textShadow:
                   hoveredIndex === index
-                    ? "0 0 15px rgba(184, 134, 11, 0.5), 0 0 30px rgba(193, 63, 255, 0.3), 0 0 45px rgba(184, 134, 11, 0.2)"
+                    ? '0 0 15px rgba(184, 134, 11, 0.5), 0 0 30px rgba(193, 63, 255, 0.3), 0 0 45px rgba(184, 134, 11, 0.2)'
                     : isMobile
-                      ? "none"
-                      : "0 0 8px rgba(255, 255, 255, 0.05)",
+                      ? 'none'
+                      : '0 0 8px rgba(255, 255, 255, 0.05)',
                 opacity: isMobile ? 1 : [0.7, 0.85, 0.7],
               }}
               transition={{
@@ -143,7 +148,7 @@ export function SocialProofSection() {
                 opacity: {
                   duration: 4,
                   repeat: Number.POSITIVE_INFINITY,
-                  ease: "easeInOut",
+                  ease: 'easeInOut',
                 },
               }}
             >

@@ -1,16 +1,16 @@
-import type React from "react"
-import type { Metadata } from "next"
-import { Analytics } from "@vercel/analytics/next"
+import type React from 'react'
+import type { Metadata } from 'next'
+import { Analytics } from '@vercel/analytics/next'
 
-import { ThemeProvider } from "@/components/layout/ThemeProvider"
-import { fontCssVariables } from "@/lib/theme"
+import { ThemeProvider } from '@/components/layout/ThemeProvider'
+import { fontCssVariables } from '@/lib/theme'
 
-import "./globals.css"
+import './globals.css'
 
 export const metadata: Metadata = {
-  title: "Hybrai",
-  description: "Cinematic AI streaming platform for films, series, and animations.",
-  generator: "Hybrai",
+  title: 'Hybrai',
+  description: 'Cinematic AI streaming platform for films, series, and animations.',
+  generator: 'Hybrai',
 }
 
 export default function RootLayout({

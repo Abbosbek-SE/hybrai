@@ -1,34 +1,26 @@
 'use client'
 
-import type React from 'react'
-
-import { motion, useInView, useMotionValue, useTransform, type PanInfo } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import { useRef, useEffect, useState } from 'react'
-import { Film, Tv, Sparkles, Layers } from 'lucide-react'
+import { Film, Camera, Clapperboard, Brain, Infinity } from 'lucide-react'
 
-interface StatCardProps {
-  icon: React.ReactNode
-  label: string
-  value: number
-  delay: number
-  isDragging?: boolean
-}
-
-function StatCard({ icon, label, value, delay, isDragging = false }: StatCardProps) {
+export function CinematicStatsSection() {
   const [count, setCount] = useState(0)
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
+  const totalContent = 7
+
   useEffect(() => {
     if (isInView) {
       let start = 0
-      const duration = 2000 // 2 seconds
-      const increment = value / (duration / 16) // 60fps
+      const duration = 2500
+      const increment = totalContent / (duration / 16)
 
       const timer = setInterval(() => {
         start += increment
-        if (start >= value) {
-          setCount(value)
+        if (start >= totalContent) {
+          setCount(totalContent)
           clearInterval(timer)
         } else {
           setCount(Math.floor(start))
@@ -37,79 +29,17 @@ function StatCard({ icon, label, value, delay, isDragging = false }: StatCardPro
 
       return () => clearInterval(timer)
     }
-  }, [isInView, value])
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 20 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-      transition={{ duration: 0.6, delay }}
-      className="group relative flex flex-col items-center gap-4 rounded-xl border border-white/5 bg-gradient-to-b from-[#1a1625]/80 to-[#0f0d15]/80 p-6 backdrop-blur-sm transition-all duration-500 hover:border-[#C13FFF]/30 md:p-8"
-      style={{ pointerEvents: isDragging ? 'none' : 'auto' }}
-    >
-      <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-[#C13FFF]/0 via-[#B8860B]/0 to-[#C13FFF]/0 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-20" />
-
-      <div className="relative z-10 text-[#B8860B] transition-colors duration-300 group-hover:text-[#C13FFF]">
-        {icon}
-      </div>
-
-      <div className="relative z-10 bg-gradient-to-br from-white via-[#B8860B] to-[#C13FFF] bg-clip-text font-mono text-5xl font-bold text-transparent transition-transform duration-300 group-hover:scale-110 md:text-6xl lg:text-7xl">
-        {count}
-      </div>
-
-      <div className="relative z-10 text-sm font-medium uppercase tracking-wider text-muted-foreground/80 md:text-base">
-        {label}
-      </div>
-
-      <div className="absolute inset-0 rounded-xl opacity-0 shadow-[0_0_30px_rgba(193,63,255,0.3)] transition-opacity duration-500 group-hover:opacity-100" />
-    </motion.div>
-  )
-}
-
-export function CinematicStatsSection() {
-  const [tickerText] = useState(
-    '1,204 views today • 56 new projects uploaded • 17 creators online now'
-  )
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
-
-  const [currentSlide, setCurrentSlide] = useState(0)
-  const [isDragging, setIsDragging] = useState(false)
-  const dragX = useMotionValue(0)
-  const tilt = useTransform(dragX, [-100, 0, 100], [5, 0, -5])
-
-  const stats = [
-    { icon: <Film className="h-10 w-10 md:h-12 md:w-12" />, label: 'Films', value: 0 },
-    { icon: <Tv className="h-10 w-10 md:h-12 md:w-12" />, label: 'TV Shows', value: 0 },
-    { icon: <Sparkles className="h-10 w-10 md:h-12 md:w-12" />, label: 'Animations', value: 0 },
-    { icon: <Layers className="h-10 w-10 md:h-12 md:w-12" />, label: 'Hybrids', value: 0 },
-  ]
-
-  const handleDragEnd = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
-    setIsDragging(false)
-    const offset = info.offset.x
-    const velocity = info.velocity.x
-
-    let newSlide = currentSlide
-
-    if (Math.abs(velocity) > 500) {
-      newSlide = velocity > 0 ? currentSlide - 1 : currentSlide + 1
-    } else if (Math.abs(offset) > 50) {
-      newSlide = offset > 0 ? currentSlide - 1 : currentSlide + 1
-    }
-
-    newSlide = Math.max(0, Math.min(stats.length - 1, newSlide))
-    setCurrentSlide(newSlide)
-  }
+  }, [isInView, totalContent])
 
   return (
     <section
       ref={ref}
-      className="relative flex w-full items-center justify-center overflow-hidden px-5 py-16 md:py-24 lg:py-32"
+      className="relative flex w-full items-center justify-center overflow-hidden px-5 py-24 md:py-32 lg:py-40"
     >
+      {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#08070C] via-[#120F1C] to-[#08070C]" />
 
+      {/* Noise texture */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.03] mix-blend-overlay"
         style={{
@@ -117,97 +47,232 @@ export function CinematicStatsSection() {
         }}
       />
 
-      <div className="relative z-10 mx-auto flex w-full max-w-[1400px] flex-col gap-12 md:gap-16">
+      {/* Spotlight beam from top */}
+      <motion.div
+        initial={{ opacity: 0, scaleY: 0 }}
+        animate={isInView ? { opacity: 0.15, scaleY: 1 } : { opacity: 0, scaleY: 0 }}
+        transition={{ duration: 1.5, delay: 0.3 }}
+        className="absolute left-1/2 top-0 h-full w-[300px] -translate-x-1/2 bg-gradient-to-b from-[#C13FFF]/30 via-[#B8860B]/10 to-transparent blur-3xl md:w-[500px]"
+        style={{ transformOrigin: 'top center' }}
+      />
+
+      <div className="relative z-10 mx-auto flex w-full max-w-[1400px] flex-col items-center justify-between gap-12 md:flex-row md:gap-16 lg:gap-24">
+        {/* Counter */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.8 }}
-          className="flex flex-col gap-4 text-center"
+          className="relative z-20 flex flex-col items-center px-4 md:px-8"
         >
-          <h2 className="bg-gradient-to-r from-[#B8860B] via-white to-[#C13FFF] bg-clip-text text-4xl font-bold tracking-tight text-transparent md:text-5xl lg:text-6xl">
-            The Future of Cinema Is Already Here.
-          </h2>
-          <p className="mx-auto max-w-3xl text-lg leading-relaxed text-muted-foreground/90 md:text-xl">
-            Hybrai is home to 0 AI-generated films, shows, and animations — with new stories added
-            every day.
-          </p>
+          {/* Ethereal glow backdrop */}
+          <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,_rgba(193,63,255,0.15),_transparent_70%)] blur-3xl" />
+
+          {/* Glass morphism container */}
+          <div className="relative">
+            {/* Main counter display with glass effect */}
+            <div className="relative rounded-3xl border border-white/5 bg-gradient-to-br from-white/[0.03] via-white/[0.01] to-transparent px-10 py-8 shadow-[0_8px_32px_rgba(0,0,0,0.3)] backdrop-blur-xl md:px-14 md:py-10">
+              {/* Subtle inner glow */}
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[#C13FFF]/[0.03] via-transparent to-[#B8860B]/[0.02]" />
+
+              {/* Minimal corner accents */}
+              <div className="absolute left-3 top-3 h-4 w-4 rounded-tl-lg border-l border-t border-white/10" />
+              <div className="absolute right-3 top-3 h-4 w-4 rounded-tr-lg border-r border-t border-white/10" />
+              <div className="absolute bottom-3 left-3 h-4 w-4 rounded-bl-lg border-b border-l border-white/10" />
+              <div className="absolute bottom-3 right-3 h-4 w-4 rounded-br-lg border-b border-r border-white/10" />
+
+              {/* Number display */}
+              <div className="relative flex items-center justify-center">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.8, delay: 0.3 }}
+                  className="text-6xl font-extralight tabular-nums tracking-[0.1em] md:text-7xl lg:text-8xl"
+                  style={{
+                    background:
+                      'linear-gradient(135deg, rgba(200, 200, 220, 0.9) 0%, rgba(180, 160, 200, 0.8) 50%, rgba(160, 140, 180, 0.7) 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                    filter: 'drop-shadow(0 0 20px rgba(193, 63, 255, 0.15))',
+                    fontVariantNumeric: 'tabular-nums',
+                    letterSpacing: '0.1em',
+                  }}
+                >
+                  {count.toLocaleString()}
+                </motion.div>
+              </div>
+
+              {/* Ambient breathing glow */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={isInView ? { opacity: [0.3, 0.6, 0.3] } : { opacity: 0 }}
+                transition={{
+                  duration: 4,
+                  repeat: Number.POSITIVE_INFINITY,
+                  ease: 'easeInOut',
+                }}
+                className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[#C13FFF]/5 via-transparent to-[#B8860B]/5 blur-xl"
+              />
+
+              {/* Subtle scan line effect */}
+              <motion.div
+                initial={{ y: '-100%' }}
+                animate={isInView ? { y: '200%' } : { y: '-100%' }}
+                transition={{
+                  duration: 4,
+                  repeat: Number.POSITIVE_INFINITY,
+                  ease: 'linear',
+                  repeatDelay: 3,
+                }}
+                className="absolute inset-0 h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent"
+              />
+            </div>
+          </div>
         </motion.div>
 
-        <div className="relative sm:hidden">
-          <div className="pointer-events-none absolute bottom-0 left-0 top-0 z-10 w-12 bg-gradient-to-r from-[#C13FFF]/20 to-transparent opacity-60" />
-          <div className="pointer-events-none absolute bottom-0 right-0 top-0 z-10 w-12 bg-gradient-to-l from-[#B8860B]/20 to-transparent opacity-60" />
+        {/* Camera aperture blades rotating */}
+        <motion.div
+          initial={{ opacity: 0, rotate: 0, scale: 1 }}
+          animate={
+            isInView
+              ? {
+                  opacity: [0.2, 0.4, 0.2],
+                  rotate: 360,
+                  scale: [1, 1.1, 1],
+                }
+              : { opacity: 0, rotate: 0, scale: 1 }
+          }
+          transition={{
+            duration: 20,
+            repeat: Number.POSITIVE_INFINITY,
+            ease: 'linear',
+          }}
+          className="absolute inset-0 -m-28 md:-m-36"
+        >
+          <svg viewBox="0 0 200 200" className="h-full w-full">
+            <defs>
+              <linearGradient id="aperture-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#B8860B" stopOpacity="0.3" />
+                <stop offset="100%" stopColor="#C13FFF" stopOpacity="0.3" />
+              </linearGradient>
+            </defs>
+            {[...Array(8)].map((_, i) => {
+              const angle = (i * 360) / 8
+              return (
+                <path
+                  key={i}
+                  d={`M 100 100 L ${100 + 80 * Math.cos((angle * Math.PI) / 180)} ${
+                    100 + 80 * Math.sin((angle * Math.PI) / 180)
+                  } L ${100 + 80 * Math.cos(((angle + 45) * Math.PI) / 180)} ${
+                    100 + 80 * Math.sin(((angle + 45) * Math.PI) / 180)
+                  } Z`}
+                  fill="url(#aperture-gradient)"
+                  stroke="#C13FFF"
+                  strokeWidth="0.5"
+                  opacity="0.4"
+                />
+              )
+            })}
+          </svg>
+        </motion.div>
+
+        {/* Floating film icons */}
+        {[...Array(5)].map((_, i) => {
+          const icons = [Film, Camera, Clapperboard, Brain, Infinity]
+          const Icon = icons[i % 5]
+          return (
+            <motion.div
+              key={`icon-${i}`}
+              initial={{ opacity: 0 }}
+              animate={
+                isInView
+                  ? {
+                      opacity: [0.2, 0.5, 0.2],
+                      scale: [1, 1.3, 1],
+                      rotate: [0, 180, 360],
+                      x: [0, Math.cos((i * Math.PI) / 1.5) * 180, 0],
+                      y: [0, Math.sin((i * Math.PI) / 1.5) * 180, 0],
+                    }
+                  : { opacity: 0 }
+              }
+              transition={{
+                duration: 8 + i * 1.5,
+                repeat: Number.POSITIVE_INFINITY,
+                delay: i * 0.5,
+                ease: 'easeInOut',
+              }}
+              className="absolute left-1/2 top-1/2"
+            >
+              <Icon className="h-5 w-5 text-[#C13FFF] md:h-6 md:w-6" />
+            </motion.div>
+          )
+        })}
+
+        {/* Lens flare streaks */}
+        {[...Array(4)].map((_, i) => (
+          <motion.div
+            key={`flare-${i}`}
+            initial={{ opacity: 0, scaleX: 0 }}
+            animate={
+              isInView ? { opacity: [0, 0.3, 0], scaleX: [0, 1, 0] } : { opacity: 0, scaleX: 0 }
+            }
+            transition={{
+              duration: 3,
+              repeat: Number.POSITIVE_INFINITY,
+              delay: i * 0.75,
+              ease: 'easeInOut',
+            }}
+            className="absolute left-1/2 top-1/2 h-0.5 w-64 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-transparent via-[#B8860B] to-transparent"
+            style={{
+              transform: `translate(-50%, -50%) rotate(${i * 45}deg)`,
+            }}
+          />
+        ))}
+
+        {/* Text content */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+          transition={{ duration: 1, delay: 0.4 }}
+          className="relative flex flex-col items-center gap-8 p-8 md:ml-auto md:items-start md:p-12 lg:p-16"
+        >
+          <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,_rgba(193,63,255,0.08),_rgba(184,134,11,0.05),_transparent_70%)] blur-[80px]" />
 
           <motion.div
-            drag="x"
-            dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={0.2}
-            onDragStart={() => setIsDragging(true)}
-            onDragEnd={handleDragEnd}
-            animate={{ x: -currentSlide * (window.innerWidth * 0.8 + 24) }}
-            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            className="flex cursor-grab gap-6 active:cursor-grabbing"
+            initial={{ opacity: 0, y: 10 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
+            className="flex flex-col items-center gap-4 md:items-start"
           >
-            {stats.map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                style={{
-                  width: '80vw',
-                  minWidth: '80vw',
-                  rotateY: currentSlide === index ? tilt : 0,
-                }}
-                className="flex-shrink-0"
-              >
-                <StatCard {...stat} delay={0.2 + index * 0.1} isDragging={isDragging} />
-              </motion.div>
-            ))}
-          </motion.div>
-
-          <div className="mt-6 flex justify-center gap-2">
-            {stats.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentSlide(index)}
-                className="group relative"
-                aria-label={`Go to slide ${index + 1}`}
-              >
-                <div
-                  className={`h-2 w-2 rounded-full transition-all duration-300 ${
-                    currentSlide === index ? 'w-8 bg-[#C13FFF]' : 'bg-white/30 hover:bg-white/50'
-                  }`}
-                />
-                {currentSlide === index && (
-                  <div className="absolute inset-0 animate-pulse rounded-full bg-[#C13FFF] opacity-60 blur-md" />
-                )}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="hidden grid-cols-2 gap-6 sm:grid md:gap-8 lg:grid-cols-4">
-          {stats.map((stat, index) => (
-            <StatCard key={stat.label} {...stat} delay={0.2 + index * 0.1} />
-          ))}
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="relative flex items-center justify-center gap-3 rounded-full border border-white/10 bg-gradient-to-r from-[#1a1625]/60 via-[#0f0d15]/60 to-[#1a1625]/60 px-6 py-4 backdrop-blur-md"
-        >
-          <div className="flex items-center gap-2">
-            <div className="relative">
-              <div className="h-2 w-2 animate-pulse rounded-full bg-red-500" />
-              <div className="absolute inset-0 h-2 w-2 animate-ping rounded-full bg-red-500" />
+            <div
+              className="text-center text-lg font-medium uppercase leading-tight tracking-[0.3em] md:text-left md:text-xl lg:text-2xl"
+              style={{
+                color: 'rgba(255, 255, 255, 0.75)',
+                fontVariant: 'small-caps',
+                letterSpacing: '0.3em',
+              }}
+            >
+              Stories on Our Platform
             </div>
-            <span className="text-xs font-bold uppercase tracking-wider text-red-500 md:text-sm">
-              LIVE
-            </span>
-          </div>
 
-          <div className="text-sm font-medium text-muted-foreground/80 md:text-base">
-            {tickerText}
-          </div>
+            <motion.div
+              initial={{ scaleX: 0, opacity: 0 }}
+              animate={isInView ? { scaleX: 1, opacity: 1 } : { scaleX: 0, opacity: 0 }}
+              transition={{ duration: 0.8, delay: 0.9 }}
+              className="h-[1px] w-32 bg-gradient-to-r from-[#B8860B] via-[#C13FFF] to-[#B8860B] opacity-60 md:w-40"
+            />
+
+            <div
+              className="text-center text-xs uppercase leading-relaxed tracking-[0.25em] md:text-left md:text-sm"
+              style={{
+                color: 'rgba(255, 255, 255, 0.5)',
+                letterSpacing: '0.25em',
+                fontWeight: 400,
+              }}
+            >
+              AI-Generated Masterpieces
+            </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>

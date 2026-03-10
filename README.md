@@ -1,1 +1,1 @@
-# Netflix alternative for AI-generated content
+# Netflix alternative for AI-generated contents
